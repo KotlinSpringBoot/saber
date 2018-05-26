@@ -16,8 +16,8 @@
                                 <h5 class="layui-timeline-title">
                                 ${Knowledge.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
                                 </h5>
-                                <textarea class="content" id="answer-${Knowledge.id}">
-                                ${Knowledge.answer}
+                                <textarea class="content" id="content-${Knowledge.id}">
+                                ${Knowledge.content}
                                 </textarea>
                             </div>
                         </li>
@@ -34,7 +34,7 @@
     $(function () {
         layui.use('layedit', function () {
             var layedit = layui.layedit;
-            layedit.build('answer-${Knowledge.id}', {height: 1000});
+            layedit.build('content-${Knowledge.id}', {height: 1000});
         });
     })
 </script>

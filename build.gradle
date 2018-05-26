@@ -52,4 +52,13 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	compile 'com.squareup.okhttp3:okhttp:3.8.1'
+	compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.27'
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
+
+	compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '0.19.2'
+
+
+
 }

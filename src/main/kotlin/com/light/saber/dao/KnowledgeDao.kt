@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query
 
 interface KnowledgeDao : JpaRepository<Knowledge, Long> {
 
-    //    JPQL里面没有limit
+    // JPQL里面没有limit
     @Query(value = "SELECT * FROM knowledge WHERE title = :title limit 1", nativeQuery = true)
     fun selectByTitle(title: String): Knowledge?
 
@@ -17,5 +17,8 @@ interface KnowledgeDao : JpaRepository<Knowledge, Long> {
 
     @Query("SELECT a FROM #{#entityName} a")
     fun page(page: Pageable): Page<Knowledge>
+
+    @Query("select count(*) from #{#entityName} a where a.url = :url")
+    abstract fun countByUrl(url: String): Int
 
 }

@@ -15,8 +15,10 @@ import java.util.*
 
 @Controller
 class KnowledgeController {
-    @Autowired lateinit var KnowledgeDao: KnowledgeDao
-    @Autowired lateinit var KnowledgeService: KnowledgeService
+    @Autowired
+    lateinit var KnowledgeDao: KnowledgeDao
+    @Autowired
+    lateinit var KnowledgeService: KnowledgeService
 
     @GetMapping("/")
     fun root(@RequestParam(value = "title", required = false) title: String?,
@@ -34,16 +36,19 @@ class KnowledgeController {
         return "index"
     }
 
+    @GetMapping("toAddKnowledgePage")
+    fun toAddKnowledgePage() = "add"
+
     @PostMapping("/addKnowledge")
     @ResponseBody
     fun addKnowledge(knowledge: Knowledge): Result<String> {
         val title = knowledge.title
-        val answer = knowledge.answer
+        val content = knowledge.content
         if (StringUtils.isEmpty(title)) {
             return Result(title, "问题不能为空", false)
         } else if (title.length > 100) {
             return Result(title, "问题长度不能超过100", false)
-        } else if (StringUtils.isEmpty(answer)) {
+        } else if (StringUtils.isEmpty(content)) {
             return Result(title, "答案不能为空", false)
         } else if (isTitleExist(title)) {
             return Result(title, "问题已经存在，请换一个问题", false)

@@ -10,10 +10,15 @@ class Knowledge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @Column(length = 100, unique = true)
+    @Column(length = 200, unique = true, nullable = false)
     var title = ""
+
+    @Column(length = 200, unique = true, nullable = false)
+    var url = ""
+
     @Lob
-    var answer = ""
+    @Column(nullable = false)
+    var content = ""
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "GMT+8")
     var gmtCreate = Date()

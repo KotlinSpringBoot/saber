@@ -14,7 +14,7 @@
             <a href="/" style="color: #009688;font-size: 1.2em;">微技 GD</a>
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
+        <ul class="layui-nav layui-layout-left ">
             <li class="layui-nav-item"><a href="/">GD 技术流</a></li>
             <li class="layui-nav-item"><a href="">服务管理</a></li>
             <li class="layui-nav-item"><a href="">用户</a></li>
@@ -46,8 +46,8 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">知识库</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="/knowledge/doCrawJianShu" target="_blank">抓取简书</a></dd>
+                        <dd><a href="/knowledge/doCrawSegmentFaultKnowledge" target="_blank">抓取SegmentFault</a></dd>
                         <dd><a href="javascript:;">列表三</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
