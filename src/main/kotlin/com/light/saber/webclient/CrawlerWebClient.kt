@@ -23,8 +23,12 @@ object CrawlerWebClient {
     }
 
     fun getPageHtmlText(url: String): String? {
-        webClient = instanceWebClient(3000)
-        return webClient?.getPage<HtmlPage>(url)?.asXml()
+        webClient = instanceWebClient(7000)
+        try {
+            return webClient?.getPage<HtmlPage>(url)?.asXml()
+        } catch (e: Exception) {
+            return null
+        }
     }
 
 }

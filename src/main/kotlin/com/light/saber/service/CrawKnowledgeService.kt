@@ -22,7 +22,12 @@ class CrawKnowledgeService {
         val 简书专题URLs = CrawSourceDao.findJianShu()
         简书专题URLs.forEach {
             for (page in 1..100) {
-                crawJianShuArticles(page, it.url)
+                try {
+                    crawJianShuArticles(page, it.url)
+                } catch (e: Exception) {
+
+                }
+
             }
         }
     }
@@ -30,13 +35,22 @@ class CrawKnowledgeService {
 
     fun doCrawSegmentFaultKnowledge() {
         for (page in 1..803) {
-            crawSegmentFault(page)
+            try {
+                crawSegmentFault(page)
+            } catch (e: Exception) {
+
+            }
+
         }
     }
 
     fun doCrawOSChinaKnowledge() {
         for (page in 1..560) {
-            crawOSChina(page)
+            try {
+                crawOSChina(page)
+            } catch (e: Exception) {
+
+            }
         }
     }
 
@@ -65,17 +79,21 @@ class CrawKnowledgeService {
         links.forEachIndexed { index, it ->
             val url = it.attr("href")
             if (KnowledgeDao.countByUrl(url) == 0) {
-                val OSChina文章HTML = CrawlerWebClient.getPageHtmlText(url)
-                val OSChina文章Document = Jsoup.parse(OSChina文章HTML)
-                val content = 获取OSChina文章内容(OSChina文章Document)
-                println(url)
-                println(content)
+                try {
+                    val OSChina文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val OSChina文章Document = Jsoup.parse(OSChina文章HTML)
+                    val content = 获取OSChina文章内容(OSChina文章Document)
+                    println(url)
+//                println(content)
+                    doSaveKnowledge(
+                            url = url,
+                            title = titles[index],
+                            content = content
+                    )
+                } catch (e: Exception) {
 
-                doSaveKnowledge(
-                        url = url,
-                        title = titles[index],
-                        content = content
-                )
+                }
+
 
             }
         }
@@ -94,22 +112,27 @@ class CrawKnowledgeService {
         document.getElementsByClass("blog-stream")[0].children().forEach {
             //            document.getElementsByClassName('blog-stream')[0].children[0].children[1].children[0].children[0]
 //            <a href=​"/a/​1190000000270453">​开启 NFS 文件系统提升 Vagrant 共享目录的性能​</a>​
-            val url = "https://segmentfault.com" + it.child(1).child(0).child(0).attr("href")
-            if (KnowledgeDao.countByUrl(url) == 0) {
-                val SegmentFault文章HTML = CrawlerWebClient.getPageHtmlText(url)
-                val SegmentFault文章Document = Jsoup.parse(SegmentFault文章HTML)
-                val title = 获取SegmentFault文章标题(SegmentFault文章Document)
-                val content = 获取SegmentFault文章内容(SegmentFault文章Document)
-                println(title)
-                println(url)
-                println(content)
+            try {
+                val url = "https://segmentfault.com" + it.child(1).child(0).child(0).attr("href")
+                if (KnowledgeDao.countByUrl(url) == 0) {
+                    val SegmentFault文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val SegmentFault文章Document = Jsoup.parse(SegmentFault文章HTML)
+                    val title = 获取SegmentFault文章标题(SegmentFault文章Document)
+                    val content = 获取SegmentFault文章内容(SegmentFault文章Document)
+                    println(title)
+                    println(url)
+                    println(content)
 
-                doSaveKnowledge(
-                        url = url,
-                        title = title,
-                        content = content
-                )
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                }
+            } catch (e: Exception) {
+
             }
+
         }
 
     }
@@ -133,22 +156,28 @@ class CrawKnowledgeService {
         val 简书专题HTML = CrawlerWebClient.getPageHtmlText(简书专题分页URL)
         val document = Jsoup.parse(简书专题HTML)
         document.getElementsByClass("content").forEach {
-            val url = getKnowledgeUrl(it)
-            if (KnowledgeDao.countByUrl(url) == 0) {
-                val 简书文章HTML = CrawlerWebClient.getPageHtmlText(url)
-                val 简书文章Document = Jsoup.parse(简书文章HTML)
-                val title = 获取简书文章标题(简书文章Document)
-                val content = 获取简书文章内容(简书文章Document)
-                println(title)
-                println(url)
-                println(content)
+            try {
+                val url = getKnowledgeUrl(it)
+                if (KnowledgeDao.countByUrl(url) == 0) {
+                    val 简书文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val 简书文章Document = Jsoup.parse(简书文章HTML)
+                    val title = 获取简书文章标题(简书文章Document)
+                    val content = 获取简书文章内容(简书文章Document)
+                    println(title)
+                    println(url)
+                    println(content)
 
-                doSaveKnowledge(
-                        url = url,
-                        title = title,
-                        content = content
-                )
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                }
+            } catch (e: Exception) {
+
             }
+
+
         }
 
 
