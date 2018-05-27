@@ -40,4 +40,31 @@ class KnowledgeCrawController {
         return "DONE"
     }
 
+    @GetMapping("/knowledge/doCrawImportNewKnowledge")
+    fun doCrawImportNewKnowledge(): String {
+        Thread {
+            CrawKnowledgeService.doCrawImportNewKnowledge()
+        }.start()
+
+        return "DONE"
+    }
+
+    @GetMapping("/knowledge/doCrawCNBlogKnowledge")
+    fun doCrawCNBlogKnowledge(): String {
+        Thread {
+            CrawKnowledgeService.doCrawCNBlogKnowledge()
+        }.start()
+
+        return "DONE"
+    }
+
+    @GetMapping("/knowledge/doCrawInfoQKnowledge")
+    fun doCrawInfoQKnowledge(): String {
+        Thread {
+            CrawKnowledgeService.doCrawInfoQKnowledge()
+        }.start()
+
+        return "DONE"
+    }
+
 }

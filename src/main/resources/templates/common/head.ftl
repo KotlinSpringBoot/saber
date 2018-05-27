@@ -49,6 +49,9 @@
                         <dd><a href="/knowledge/doCrawJianShu" target="_blank">抓取简书</a></dd>
                         <dd><a href="/knowledge/doCrawSegmentFaultKnowledge" target="_blank">抓取SegmentFault</a></dd>
                         <dd><a href="/knowledge/doCrawOSChinaKnowledge" target="_blank">抓取OSChina</a></dd>
+                        <dd><a href="/knowledge/doCrawImportNewKnowledge" target="_blank">抓取ImportNew</a></dd>
+                        <dd><a href="/knowledge/doCrawCNBlogKnowledge" target="_blank">抓取CNBlog</a></dd>
+                        <dd><a href="/knowledge/doCrawInfoQKnowledge" target="_blank">抓取InfoQ</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>

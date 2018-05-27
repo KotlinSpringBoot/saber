@@ -62,6 +62,197 @@ class CrawKnowledgeService {
         }
     }
 
+    fun doCrawImportNewKnowledge() {
+        for (page in 1..135) {
+            try {
+                launch(CommonPool) {
+                    crawImportNew(page)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun doCrawITEyeKnowledge() {
+        for (page in 1..10000) {
+            try {
+                launch(CommonPool) {
+                    crawITEye(page)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun doCrawCNBlogKnowledge() {
+        for (page in 1..200) {
+            try {
+                launch(CommonPool) {
+                    crawCNBlog(page)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun doCrawInfoQKnowledge() {
+        for (page in 0..40) {
+            try {
+                launch(CommonPool) {
+                    crawInfoQ(page)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    private fun crawInfoQ(page: Int) {
+        val pageUrl = "http://www.infoq.com/cn/java/articles/${page * 12}"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+        // document.getElementsByClassName("news_type2 full_screen")[0].children[1].children[0]
+        //<a href=​"/​cn/​articles/​Reactive-Systems-Akka-Actors-DomainDrivenDesign" title=​"使用Akka的Actor模型和领域驱动设计构建反应式系统">​…​</a>​
+        document.getElementsByClass("news_type2 full_screen").forEach {
+            val url = it.child(1).child(0).attr("href")
+            val title = it.child(1).child(0).html()
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                try {
+                    val InfoQ文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val InfoQ文章Document = Jsoup.parse(InfoQ文章HTML)
+                    val content = 获取InfoQ文章内容(InfoQ文章Document)
+                    println(title)
+                    println(url)
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+    }
+
+    private fun 获取InfoQ文章内容(infoQ文章Document: Document?): String? {
+        return infoQ文章Document?.getElementsByClass("text_info text_info_article")?.get(0)?.html()
+    }
+
+    private fun crawCNBlog(page: Int) {
+        val pageUrl = "https://www.cnblogs.com/#p$page"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+        // document.getElementsByClassName("titlelnk")[0]
+        //<a class=​"titlelnk" href=​"https:​/​/​www.cnblogs.com/​qzrzq1/​p/​9069509.html" target=​"_blank">​基于Orangpi Zero和Linux ALSA实现WIFI无线音箱（一）​</a>​
+        document.getElementsByClass("titlelnk").forEach {
+            val url = it.attr("href")
+            val title = it.html()
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                try {
+                    val CNBlog文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val CNBlog文章Document = Jsoup.parse(CNBlog文章HTML)
+                    val content = 获取CNBlog文章内容(CNBlog文章Document)
+                    println(title)
+                    println(url)
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+    }
+
+    private fun 获取CNBlog文章内容(cnBlog文章Document: Document?): String? {
+        return cnBlog文章Document?.getElementById("cnblogs_post_body")?.html()
+    }
+
+    private fun crawITEye(page: Int) {
+        val pageUrl = "http://www.iteye.com/blogs/category/language?page=$page"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+
+        // document.getElementsByClassName("content")[0].children[0].children[0]
+        //<a href=​"http:​/​/​fhuan123.iteye.com/​blog/​2423594" title=​"C#Make自动化构建-简介" target=​"_blank">​C#Make自动化构建-简介​</a>​
+        document.getElementsByClass("content").forEach {
+            val url = it.child(0).child(0).attr("href")
+            val title = it.child(0).child(0).html()
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                try {
+                    val ITEye文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val ITEye文章Document = Jsoup.parse(ITEye文章HTML)
+                    val content = 获取ITEye文章内容(ITEye文章Document)
+                    println(title)
+                    println(url)
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+    }
+
+    private fun 获取ITEye文章内容(itEye文章Document: Document?): String? {
+        return itEye文章Document?.getElementById("blog_content")?.html()
+    }
+
+    private fun crawImportNew(page: Int) {
+        val pageUrl = "http://www.importnew.com/all-posts/page/$page"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+        // document.getElementsByClassName("meta-title")[0]
+        //<a class=​"meta-title" target=​"_blank" href=​"http:​/​/​www.importnew.com/​28577.html" title=​"使用 Java 注解自动化处理对应关系实现注释代码化 ">​使用 Java 注解自动化处理对应关系实现注释代码化​</a>​
+        document.getElementsByClass("meta-title").forEach {
+            val url = it.attr("href")
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                try {
+                    val ImportNew文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val ImportNew文章Document = Jsoup.parse(ImportNew文章HTML)
+                    val title = 获取ImportNew文章标题(ImportNew文章Document)
+                    val content = 获取ImportNew文章内容(ImportNew文章Document)
+                    println(title)
+                    println(url)
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+    }
+
+    private fun 获取ImportNew文章内容(importNew文章Document: Document?): String? {
+        // document.getElementsByClassName("entry")
+        return importNew文章Document?.getElementsByClass("entry")?.get(0)?.html()
+    }
+
+    private fun 获取ImportNew文章标题(importNew文章Document: Document?): String? {
+//        document.getElementsByClassName("entry-header")[0]
+//        <div class=​"entry-header">​<h1>​使用 Java 注解自动化处理对应关系实现注释代码化​</h1>​</div>​
+//        document.getElementsByClassName("entry-header")[0].children[0].innerHTML
+//        "使用 Java 注解自动化处理对应关系实现注释代码化"
+        return importNew文章Document?.getElementsByClass("entry-header")?.get(0)?.child(0)?.html()
+
+    }
+
     private fun crawOSChina(page: Int) {
         val pageUrl = "https://www.oschina.net/action/ajax/get_more_recommend_blog?classification=0&p=$page"
         val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
@@ -101,8 +292,6 @@ class CrawKnowledgeService {
                 } catch (e: Exception) {
 
                 }
-
-
             }
         }
     }
