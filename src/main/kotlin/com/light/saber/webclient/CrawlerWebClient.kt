@@ -22,6 +22,7 @@ object CrawlerWebClient {
         return webClient as WebClient
     }
 
+    @Synchronized
     fun getPageHtmlText(url: String): String? {
         webClient = instanceWebClient(3000)
         try {

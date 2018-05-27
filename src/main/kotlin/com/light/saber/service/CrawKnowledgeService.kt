@@ -4,8 +4,6 @@ import com.light.saber.dao.CrawSourceDao
 import com.light.saber.dao.KnowledgeDao
 import com.light.saber.model.Knowledge
 import com.light.saber.webclient.CrawlerWebClient
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -25,9 +23,7 @@ class CrawKnowledgeService {
         简书专题URLs.forEach {
             for (page in 1..100) {
                 try {
-                    launch(CommonPool) {
-                        crawJianShuArticles(page, it.url)
-                    }
+                    crawJianShuArticles(page, it.url)
                 } catch (e: Exception) {
 
                 }
@@ -40,9 +36,7 @@ class CrawKnowledgeService {
     fun doCrawSegmentFaultKnowledge() {
         for (page in 1..803) {
             try {
-                launch(CommonPool) {
-                    crawSegmentFault(page)
-                }
+                crawSegmentFault(page)
             } catch (e: Exception) {
 
             }
@@ -53,9 +47,7 @@ class CrawKnowledgeService {
     fun doCrawOSChinaKnowledge() {
         for (page in 1..560) {
             try {
-                launch(CommonPool) {
-                    crawOSChina(page)
-                }
+                crawOSChina(page)
             } catch (e: Exception) {
 
             }
@@ -65,9 +57,7 @@ class CrawKnowledgeService {
     fun doCrawImportNewKnowledge() {
         for (page in 1..135) {
             try {
-                launch(CommonPool) {
-                    crawImportNew(page)
-                }
+                crawImportNew(page)
             } catch (e: Exception) {
 
             }
@@ -77,9 +67,7 @@ class CrawKnowledgeService {
     fun doCrawITEyeKnowledge() {
         for (page in 1..10000) {
             try {
-                launch(CommonPool) {
-                    crawITEye(page)
-                }
+                crawITEye(page)
             } catch (e: Exception) {
 
             }
@@ -89,9 +77,7 @@ class CrawKnowledgeService {
     fun doCrawCNBlogKnowledge() {
         for (page in 1..200) {
             try {
-                launch(CommonPool) {
-                    crawCNBlog(page)
-                }
+                crawCNBlog(page)
             } catch (e: Exception) {
 
             }
@@ -101,9 +87,7 @@ class CrawKnowledgeService {
     fun doCrawInfoQKnowledge() {
         for (page in 0..40) {
             try {
-                launch(CommonPool) {
-                    crawInfoQ(page)
-                }
+                crawInfoQ(page)
             } catch (e: Exception) {
 
             }

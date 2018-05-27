@@ -2,7 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- 强制让文档与设备的宽度保持1：1 -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>
+    <link href="/assets/logo.jpg" rel="shortcut icon" type="image/x-icon"/>
     <title>MicroTek</title>
     <link rel="stylesheet" href="/assets/layui/css/layui.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
@@ -11,6 +15,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">
+            <img src="/assets/logo.jpg" style="height: 2.5em ;width: 2.5em">
             <a href="/" style="color: #009688;font-size: 1.2em;">微技 GD</a>
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
