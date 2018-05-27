@@ -13,7 +13,7 @@ class Knowledge {
     @Column(length = 200, unique = true, nullable = false)
     var title = ""
 
-    @Column(length = 200, unique = true, nullable = false)
+    @Column(length = 200)
     var url = ""
 
     @Lob

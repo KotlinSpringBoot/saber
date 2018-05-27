@@ -16,7 +16,7 @@
                                 <h5 class="layui-timeline-title">
                                 ${Knowledge.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
                                 </h5>
-                                <textarea class="content" id="content-${Knowledge.id}">
+                                <textarea class="content" id="content-${Knowledge.id?string("#")}">
                                 ${Knowledge.content}
                                 </textarea>
                             </div>
@@ -34,7 +34,12 @@
     $(function () {
         layui.use('layedit', function () {
             var layedit = layui.layedit;
-            layedit.build('content-${Knowledge.id}', {height: 1000});
+            layedit.build('content-${Knowledge.id?string("#")}',
+                    {
+                        height: 1000,
+                        tool: []
+                    }
+            );
         });
     })
 </script>

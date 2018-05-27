@@ -48,7 +48,7 @@
                     <dl class="layui-nav-child">
                         <dd><a href="/knowledge/doCrawJianShu" target="_blank">抓取简书</a></dd>
                         <dd><a href="/knowledge/doCrawSegmentFaultKnowledge" target="_blank">抓取SegmentFault</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
+                        <dd><a href="/knowledge/doCrawOSChinaKnowledge" target="_blank">抓取OSChina</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>

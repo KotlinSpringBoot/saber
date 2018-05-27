@@ -77,16 +77,22 @@
 
             var title = $('#title').val();
             var content = layedit.getContent(layeditIndex);
+            var data = {title: title, content: content};
+            console.log(data)
 
             $.ajax({
                 url: '/addKnowledge',
-                data: {title: title, content: content},
+                data: data,
                 method: 'POST',
                 async: false,
                 success: (result) => {
-                    layer.msg(result.msg)
-                    //alert(JSON.stringify(result.msg))
-                    location.reload()
+                    if (result.success === true) {
+                        layer.msg(result.msg)
+                        location.reload()
+                    } else {
+                        layer.msg(result.msg)
+                    }
+
                 },
                 error: (err) => {
                     layer.msg(err)

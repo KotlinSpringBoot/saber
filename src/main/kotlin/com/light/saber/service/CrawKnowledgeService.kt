@@ -4,13 +4,12 @@ import com.light.saber.dao.CrawSourceDao
 import com.light.saber.dao.KnowledgeDao
 import com.light.saber.model.Knowledge
 import com.light.saber.webclient.CrawlerWebClient
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.util.StringUtils
 
 @Service
 class CrawKnowledgeService {
@@ -20,14 +19,10 @@ class CrawKnowledgeService {
     lateinit var CrawSourceDao: CrawSourceDao
 
     fun doCrawJianShuKnowledge() {
-
         val 简书专题URLs = CrawSourceDao.findJianShu()
-
         简书专题URLs.forEach {
-            launch(CommonPool) {
-                for (page in 1..100) {
-                    crawJianShuArticles(page, it.url)
-                }
+            for (page in 1..100) {
+                crawJianShuArticles(page, it.url)
             }
         }
     }
@@ -35,11 +30,62 @@ class CrawKnowledgeService {
 
     fun doCrawSegmentFaultKnowledge() {
         for (page in 1..803) {
-            launch(CommonPool) {
-                crawSegmentFault(page)
+            crawSegmentFault(page)
+        }
+    }
+
+    fun doCrawOSChinaKnowledge() {
+        for (page in 1..560) {
+            crawOSChina(page)
+        }
+    }
+
+    private fun crawOSChina(page: Int) {
+        val pageUrl = "https://www.oschina.net/action/ajax/get_more_recommend_blog?classification=0&p=$page"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+
+//        document.getElementsByClassName("blog-name")[0]
+
+        val titles = arrayListOf<String>()
+
+        document.getElementsByClass("blog-name").forEach {
+            titles.add(it.html())
+        }
+
+//        document.getElementsByClassName("blog-title-link")[0]
+//<a href=​"https:​/​/​my.oschina.net/​u/​3115385/​blog/​1819321" class=​"sc overh blog-title-link" target=​"_blank" title=​"JVM调优-堆大小设置、回收器选择">​…​</a>​
+
+        val links = document.getElementsByClass("blog-title-link")
+
+        if (titles.size != links.size) {
+            return
+        }
+
+        links.forEachIndexed { index, it ->
+            val url = it.attr("href")
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                val OSChina文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                val OSChina文章Document = Jsoup.parse(OSChina文章HTML)
+                val content = 获取OSChina文章内容(OSChina文章Document)
+                println(url)
+                println(content)
+
+                doSaveKnowledge(
+                        url = url,
+                        title = titles[index],
+                        content = content
+                )
+
             }
         }
     }
+
+    private fun 获取OSChina文章内容(osChina文章Document: Document?): String? {
+//        document.getElementById("blogBody")
+        return osChina文章Document?.getElementById("blogBody")?.html()
+    }
+
 
     private fun crawSegmentFault(page: Int) {
         val SegmentFault文章列表的HTML = CrawlerWebClient.getPageHtmlText("https://segmentfault.com/blogs?page=$page")
@@ -125,10 +171,15 @@ class CrawKnowledgeService {
     }
 
     private fun doSaveKnowledge(url: String, title: String?, content: String?) {
+        if (StringUtils.isEmpty(url) || StringUtils.isEmpty(title) || StringUtils.isEmpty(content)) {
+            return
+        }
+
         val Knowledge = Knowledge()
         Knowledge.url = url
         Knowledge.title = title ?: ""
         Knowledge.content = content ?: ""
+
         try {
             KnowledgeDao.save(Knowledge)
         } catch (e: Exception) {

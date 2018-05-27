@@ -29,12 +29,12 @@
                             <i class="layui-icon layui-timeline-axis"></i>
                             <div class="layui-timeline-content layui-text">
                                 <h3 class="layui-timeline-title">
-                                    <a href="/knowledge/${e.id}" target="_blank" style="color: #469689">${e.title}</a>
+                                    <a href="/knowledge/${e.id?string("#")}" target="_blank" style="color: #469689">${e.title}</a>
                                 </h3>
                                 <h5 class="layui-timeline-title">
                                     ${e.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
                                 </h5>
-                                <textarea class="content" id="content-${e.id}">
+                                <textarea class="content" id="content-${e.id?string("#")}">
                                     ${e.content}
                                 </textarea>
                             </div>
@@ -65,9 +65,9 @@
             var layedit = layui.layedit;
             <#if feeds?exists>
                 <#list feeds as e>
-                layedit.build('content-${e.id}',
+                layedit.build('content-${e.id?string("#")}',
                         {
-                            height: 300,
+                            height: 520,
                             tool: []
                         }
                 );
@@ -79,9 +79,9 @@
         //完整功能
         laypage.render({
             elem: 'pagination'
-            , count: <#if total?exists>${total}<#else>0</#if> //数据总数，从服务端得到
-            , limit: ${pageSize!10}
-            , curr: ${pageNum!1}
+            , count: <#if total?exists>${total?string("#")}<#else>0</#if> //数据总数，从服务端得到
+            , limit: ${pageSize!10?string("#")}
+            , curr: ${pageNum!1?string("#")}
             , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
             , jump: function (obj, first) {
                 //obj包含了当前分页的所有参数，比如：

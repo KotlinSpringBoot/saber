@@ -13,6 +13,8 @@ INSERT INTO `saber`.`craw_source` (`type`, `url`) VALUES ('JIAN_SHU', 'http://ww
 INSERT INTO `saber`.`craw_source` (`type`, `url`) VALUES ('JIAN_SHU', 'http://www.jianshu.com/c/04cb7410c597');
 
 
+delete from knowledge where content is null or content ='' or title is null or title='';
+
 	id	type	url
 	2	JIAN_SHU	http://www.jianshu.com/c/498ebcfd27ad
 	3	JIAN_SHU	http://www.jianshu.com/c/c3fe8e7aeb09

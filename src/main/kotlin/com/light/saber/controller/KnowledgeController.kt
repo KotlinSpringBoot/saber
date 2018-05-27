@@ -53,10 +53,14 @@ class KnowledgeController {
         } else if (isTitleExist(title)) {
             return Result(title, "问题已经存在，请换一个问题", false)
         } else {
-            knowledge.gmtCreate = Date()
-            knowledge.gmtModified = Date()
-            KnowledgeDao.save(knowledge)
-            return Result(title, "保存成功", true)
+            try {
+                knowledge.gmtCreate = Date()
+                knowledge.gmtModified = Date()
+                KnowledgeDao.save(knowledge)
+                return Result(title, "保存成功", true)
+            } catch (e: Exception) {
+                return Result(title, "系统出错啦:${e.message}", false)
+            }
         }
 
     }

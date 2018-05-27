@@ -14,13 +14,29 @@ class KnowledgeCrawController {
 
     @GetMapping("/knowledge/doCrawJianShu")
     fun doCrawJianShu(): String {
-        CrawKnowledgeService.doCrawJianShuKnowledge()
+        Thread {
+            CrawKnowledgeService.doCrawJianShuKnowledge()
+        }.start()
+
+
         return "DONE"
     }
 
     @GetMapping("/knowledge/doCrawSegmentFaultKnowledge")
     fun doCrawSegmentFaultKnowledge(): String {
-        CrawKnowledgeService.doCrawSegmentFaultKnowledge()
+        Thread {
+            CrawKnowledgeService.doCrawSegmentFaultKnowledge()
+        }.start()
+
+        return "DONE"
+    }
+
+    @GetMapping("/knowledge/doCrawOSChinaKnowledge")
+    fun doCrawOSChinaKnowledge(): String {
+        Thread {
+            CrawKnowledgeService.doCrawOSChinaKnowledge()
+        }.start()
+
         return "DONE"
     }
 
