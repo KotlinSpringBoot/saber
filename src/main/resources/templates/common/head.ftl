@@ -63,6 +63,7 @@
                 <li class="layui-nav-item"><a href="">机器人管理</a></li>
                 <li class="layui-nav-item"><a href="">发布服务</a></li>
             </ul>
+
         </div>
     </div>
 

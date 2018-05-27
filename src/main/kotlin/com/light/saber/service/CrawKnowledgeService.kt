@@ -4,6 +4,8 @@ import com.light.saber.dao.CrawSourceDao
 import com.light.saber.dao.KnowledgeDao
 import com.light.saber.model.Knowledge
 import com.light.saber.webclient.CrawlerWebClient
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -23,7 +25,9 @@ class CrawKnowledgeService {
         简书专题URLs.forEach {
             for (page in 1..100) {
                 try {
-                    crawJianShuArticles(page, it.url)
+                    launch(CommonPool) {
+                        crawJianShuArticles(page, it.url)
+                    }
                 } catch (e: Exception) {
 
                 }
@@ -36,7 +40,9 @@ class CrawKnowledgeService {
     fun doCrawSegmentFaultKnowledge() {
         for (page in 1..803) {
             try {
-                crawSegmentFault(page)
+                launch(CommonPool) {
+                    crawSegmentFault(page)
+                }
             } catch (e: Exception) {
 
             }
@@ -47,7 +53,9 @@ class CrawKnowledgeService {
     fun doCrawOSChinaKnowledge() {
         for (page in 1..560) {
             try {
-                crawOSChina(page)
+                launch(CommonPool) {
+                    crawOSChina(page)
+                }
             } catch (e: Exception) {
 
             }
