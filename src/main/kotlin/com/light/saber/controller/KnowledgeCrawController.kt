@@ -48,6 +48,14 @@ class KnowledgeCrawController {
 
         return "DONE"
     }
+    @GetMapping("/knowledge/doCrawITEyeKnowledge")
+    fun doCrawITEyeKnowledge(): String {
+        Thread {
+            CrawKnowledgeService.doCrawITEyeKnowledge()
+        }.start()
+
+        return "DONE"
+    }
 
     @GetMapping("/knowledge/doCrawCNBlogKnowledge")
     fun doCrawCNBlogKnowledge(): String {

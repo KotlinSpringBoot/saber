@@ -25,10 +25,10 @@ object CrawlerWebClient {
     @Synchronized
     fun getPageHtmlText(url: String): String? {
         webClient = instanceWebClient(3000)
-        try {
-            return webClient?.getPage<HtmlPage>(url)?.asXml()
+        return try {
+            webClient?.getPage<HtmlPage>(url)?.asXml()
         } catch (e: Exception) {
-            return null
+            null
         }
     }
 
