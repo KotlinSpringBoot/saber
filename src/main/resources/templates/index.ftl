@@ -52,7 +52,13 @@
         </div>
     </div>
 </div>
-
+<style>
+    .layui-layedit {
+        border-width: 0px;
+        border-style: solid;
+        border-radius: 2px;
+    }
+</style>
 <script src="/assets/layui/layui.all.js"></script>
 <script>
     $(function () {
