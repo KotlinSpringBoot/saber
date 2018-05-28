@@ -17,6 +17,8 @@ class CrawKnowledgeService {
     lateinit var KnowledgeDao: KnowledgeDao
     @Autowired
     lateinit var CrawSourceDao: CrawSourceDao
+    @Autowired
+    lateinit var CrawlerWebClient: CrawlerWebClient
 
     fun doCrawJianShuKnowledge() {
         val 简书专题URLs = CrawSourceDao.findJianShu()
