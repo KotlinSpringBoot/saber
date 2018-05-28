@@ -18,6 +18,17 @@ class CrawKnowledgeService {
     @Autowired
     lateinit var CrawSourceDao: CrawSourceDao
 
+
+    fun doCrawBlockChainKnowledge() {
+        for (page in 0..40) {
+            try {
+                crawBlockChain(page)
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
     fun doCrawJianShuKnowledge() {
         val 简书专题URLs = CrawSourceDao.findJianShu()
         简书专题URLs.forEach {
@@ -93,6 +104,36 @@ class CrawKnowledgeService {
             }
         }
     }
+
+    private fun crawBlockChain(page: Int) {
+        val pageUrl = "http://www.blockchainbrother.com/articles?page=${page}"
+        val 文章列表HTML = CrawlerWebClient.getPageHtmlText(pageUrl)
+        val document = Jsoup.parse(文章列表HTML)
+        // document.getElementsByClassName("news_type2 full_screen")[0].children[1].children[0]
+        //<a href=​"/​cn/​articles/​Reactive-Systems-Akka-Actors-DomainDrivenDesign" title=​"使用Akka的Actor模型和领域驱动设计构建反应式系统">​…​</a>​
+        document.getElementsByClass("title").forEach {
+            val url = it.child(0).attr("href")
+            val title = it.child(0).html()
+            if (KnowledgeDao.countByUrl(url) == 0) {
+                try {
+                    val BlockChain文章HTML = CrawlerWebClient.getPageHtmlText(url)
+                    val BlockChain文章Document = Jsoup.parse(BlockChain文章HTML)
+                    val content = 获取BlockChain文章内容(BlockChain文章Document)
+                    println(title)
+                    println(url)
+                    doSaveKnowledge(
+                            url = url,
+                            title = title,
+                            content = content
+                    )
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+
+    }
+
 
     private fun crawInfoQ(page: Int) {
         val pageUrl = "http://www.infoq.com/cn/java/articles/${page * 12}"
@@ -362,6 +403,10 @@ class CrawKnowledgeService {
         }
 
 
+    }
+
+    private fun 获取BlockChain文章内容(infoQ文章Document: Document?): String? {
+        return infoQ文章Document?.getElementsByClass("widget-article")?.get(0)?.html()
     }
 
     private fun 获取简书文章内容(jianShuArticleDocument: Document?): String? {
