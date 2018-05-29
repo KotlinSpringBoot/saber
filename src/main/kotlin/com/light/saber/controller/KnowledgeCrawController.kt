@@ -79,7 +79,7 @@ class KnowledgeCrawController {
 
         return "DONE"
     }
-    
+
 
     @GetMapping("/knowledge/doCrawBlockChainKnowledge")
     fun doCrawBlockChainKnowledge(): String {
