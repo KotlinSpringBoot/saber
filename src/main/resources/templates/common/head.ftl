@@ -58,6 +58,8 @@
                         <dd><a href="/knowledge/doCrawImportNewKnowledge" target="_blank">抓取ImportNew</a></dd>
                         <dd><a href="/knowledge/doCrawCNBlogKnowledge" target="_blank">抓取CNBlog</a></dd>
                         <dd><a href="/knowledge/doCrawInfoQKnowledge" target="_blank">抓取InfoQ</a></dd>
+                        <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
+                        <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>

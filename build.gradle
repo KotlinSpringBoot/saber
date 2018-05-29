@@ -59,6 +59,8 @@ dependencies {
 
 	compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '0.19.2'
 
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
 
 
 }

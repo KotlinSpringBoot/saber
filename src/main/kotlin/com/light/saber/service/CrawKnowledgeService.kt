@@ -17,7 +17,8 @@ class CrawKnowledgeService {
     lateinit var KnowledgeDao: KnowledgeDao
     @Autowired
     lateinit var CrawSourceDao: CrawSourceDao
-
+    @Autowired
+    lateinit var CrawlerWebClient: CrawlerWebClient
 
     fun doCrawBlockChainKnowledge() {
         for (page in 0..40) {

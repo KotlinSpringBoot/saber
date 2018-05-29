@@ -7,9 +7,27 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
+import java.util.*
 
-@Service
+@Service("knowledgeService")
 class KnowledgeServiceImpl : KnowledgeService {
+    override fun doSaveKnowledge(url: String, title: String, content: String?) {
+        if (StringUtils.isEmpty(url) || StringUtils.isEmpty(title) || StringUtils.isEmpty(content)) {
+            return
+        }
+
+        val Knowledge = Knowledge()
+        Knowledge.title = title ?: ""
+        Knowledge.content = content ?: ""
+        Knowledge.gmtCreate = Date()
+        Knowledge.gmtModified = Date()
+        try {
+            KnowledgeDao.save(Knowledge)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     @Autowired lateinit var KnowledgeDao: KnowledgeDao
     override fun page(title: String?, page: Pageable): Page<Knowledge> {
         if (StringUtils.isEmpty(title)) {
