@@ -88,6 +88,7 @@ public class TextRankKeyword {
         for (int i = 0; i < nKeyword; ++i) {
             result += list.get(i).getKey() + ';';
         }
+        System.out.print(result);
         return result;
     }
 

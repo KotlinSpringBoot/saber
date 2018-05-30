@@ -5,6 +5,7 @@ import org.htmlparser.Parser;
 import org.htmlparser.beans.StringBean;
 import org.htmlparser.filters.CssSelectorNodeFilter;
 import org.htmlparser.util.NodeList;
+import org.springframework.util.StringUtils;
 
 public class HtmlUtil {
 
@@ -54,6 +55,8 @@ public class HtmlUtil {
         parser.visitAllNodesWith(bean);
         parser.reset();
         String text = bean.getStrings();
+        if(StringUtils.isEmpty(text)) return "";
+
         String reg = "[^\u4e00-\u9fa5]";
         text = text.replaceAll(reg, " ");
         return text;
