@@ -12,6 +12,7 @@
                                 ${Knowledge.title}
                                 </h3>
                                 <h5 class="layui-timeline-title">
+                                ${Knowledge.keyWords!""}
                                 ${Knowledge.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
                                 </h5>
                                 <textarea class="content" id="content-${Knowledge.id?string("#")}">

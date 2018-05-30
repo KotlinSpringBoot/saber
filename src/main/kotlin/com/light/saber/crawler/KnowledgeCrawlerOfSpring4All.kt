@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
+import org.springframework.util.StringUtils
 import java.net.URL
 
 @Service
@@ -35,14 +36,21 @@ class KnowledgeCrawlerOfSpring4All : KnowledgeJsonCrawler {
             val data = map["data"] as Map<*, *>
             val list = data["list"] as JSONArray
             list.forEach {
-                val articleUrl = "http://www.spring4all.com/article/${(it as Map<*, *>)["id"]}"
-                val articleTitle = it["title"] as String
-                val articleHTML = CrawlerWebClient.getPageHtmlText(articleUrl)
-                val articleDocument = Jsoup.parse(articleHTML)
-                val articleBody = getArticleBody(articleDocument)
-                println(articleTitle)
-                println(articleUrl)
-                KnowledgeService.doSaveKnowledge(articleUrl, articleTitle, articleBody)
+                try {
+                    val articleUrl = "http://www.spring4all.com/article/${(it as Map<*, *>)["id"]}"
+                    val articleTitle = it["title"] as String
+                    println(articleUrl)
+                    val articleHTML = CrawlerWebClient.getPageHtmlText(articleUrl)
+                    if (!StringUtils.isEmpty(articleHTML)) {
+                        val articleDocument = Jsoup.parse(articleHTML)
+                        val articleBody = getArticleBody(articleDocument)
+                        println(articleTitle)
+                        println(articleUrl)
+                        KnowledgeService.doSaveKnowledge(articleUrl, articleTitle, articleBody)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }

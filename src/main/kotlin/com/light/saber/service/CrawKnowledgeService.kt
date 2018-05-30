@@ -1,7 +1,7 @@
 package com.light.saber.service
 
-import com.light.saber.dao.CrawSourceDao
-import com.light.saber.dao.KnowledgeDao
+import com.light.saber.dao.CrawSourceMapper
+import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
 import com.light.saber.webclient.CrawlerWebClient
 import org.jsoup.Jsoup
@@ -14,9 +14,9 @@ import org.springframework.util.StringUtils
 @Service
 class CrawKnowledgeService {
     @Autowired
-    lateinit var KnowledgeDao: KnowledgeDao
+    lateinit var KnowledgeMapper: KnowledgeMapper
     @Autowired
-    lateinit var CrawSourceDao: CrawSourceDao
+    lateinit var CrawSourceMapper: CrawSourceMapper
     @Autowired
     lateinit var CrawlerWebClient: CrawlerWebClient
 
@@ -31,7 +31,7 @@ class CrawKnowledgeService {
     }
 
     fun doCrawJianShuKnowledge() {
-        val 简书专题URLs = CrawSourceDao.findJianShu()
+        val 简书专题URLs = CrawSourceMapper.findJianShu()
         简书专题URLs.forEach {
             for (page in 1..100) {
                 try {
@@ -115,7 +115,7 @@ class CrawKnowledgeService {
         document.getElementsByClass("title").forEach {
             val url = it.child(0).attr("href")
             val title = it.child(0).html()
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val BlockChain文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val BlockChain文章Document = Jsoup.parse(BlockChain文章HTML)
@@ -145,7 +145,7 @@ class CrawKnowledgeService {
         document.getElementsByClass("news_type2 full_screen").forEach {
             val url = it.child(1).child(0).attr("href")
             val title = it.child(1).child(0).html()
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val InfoQ文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val InfoQ文章Document = Jsoup.parse(InfoQ文章HTML)
@@ -178,7 +178,7 @@ class CrawKnowledgeService {
         document.getElementsByClass("titlelnk").forEach {
             val url = it.attr("href")
             val title = it.html()
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val CNBlog文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val CNBlog文章Document = Jsoup.parse(CNBlog文章HTML)
@@ -212,7 +212,7 @@ class CrawKnowledgeService {
         document.getElementsByClass("content").forEach {
             val url = it.child(0).child(0).attr("href")
             val title = it.child(0).child(0).html()
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val ITEye文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val ITEye文章Document = Jsoup.parse(ITEye文章HTML)
@@ -244,7 +244,7 @@ class CrawKnowledgeService {
         //<a class=​"meta-title" target=​"_blank" href=​"http:​/​/​www.importnew.com/​28577.html" title=​"使用 Java 注解自动化处理对应关系实现注释代码化 ">​使用 Java 注解自动化处理对应关系实现注释代码化​</a>​
         document.getElementsByClass("meta-title").forEach {
             val url = it.attr("href")
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val ImportNew文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val ImportNew文章Document = Jsoup.parse(ImportNew文章HTML)
@@ -303,7 +303,7 @@ class CrawKnowledgeService {
 
         links.forEachIndexed { index, it ->
             val url = it.attr("href")
-            if (KnowledgeDao.countByUrl(url) == 0) {
+            if (KnowledgeMapper.countByUrl(url) == 0) {
                 try {
                     val OSChina文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val OSChina文章Document = Jsoup.parse(OSChina文章HTML)
@@ -337,7 +337,7 @@ class CrawKnowledgeService {
 //            <a href=​"/a/​1190000000270453">​开启 NFS 文件系统提升 Vagrant 共享目录的性能​</a>​
             try {
                 val url = "https://segmentfault.com" + it.child(1).child(0).child(0).attr("href")
-                if (KnowledgeDao.countByUrl(url) == 0) {
+                if (KnowledgeMapper.countByUrl(url) == 0) {
                     val SegmentFault文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val SegmentFault文章Document = Jsoup.parse(SegmentFault文章HTML)
                     val title = 获取SegmentFault文章标题(SegmentFault文章Document)
@@ -381,7 +381,7 @@ class CrawKnowledgeService {
         document.getElementsByClass("content").forEach {
             try {
                 val url = getKnowledgeUrl(it)
-                if (KnowledgeDao.countByUrl(url) == 0) {
+                if (KnowledgeMapper.countByUrl(url) == 0) {
                     val 简书文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val 简书文章Document = Jsoup.parse(简书文章HTML)
                     val title = 获取简书文章标题(简书文章Document)
@@ -426,6 +426,7 @@ class CrawKnowledgeService {
         return "http://www.jianshu.com" + it.child(0).attr("href")
     }
 
+    @Autowired lateinit var TakeKeyWordsService: TakeKeyWordsService
     private fun doSaveKnowledge(url: String, title: String?, content: String?) {
         if (StringUtils.isEmpty(url) || StringUtils.isEmpty(title) || StringUtils.isEmpty(content)) {
             return
@@ -436,10 +437,16 @@ class CrawKnowledgeService {
         Knowledge.title = title ?: ""
         Knowledge.content = content ?: ""
 
+        val html = Knowledge.content
+        if (!StringUtils.isEmpty(html)) {
+            val keyWords = TakeKeyWordsService.getKeyWords(html)
+            Knowledge.keyWords = keyWords
+        }
+
         try {
-            KnowledgeDao.save(Knowledge)
+            KnowledgeMapper.save(Knowledge)
         } catch (e: Exception) {
-            // ignore
+            e.printStackTrace()
         }
     }
 }
