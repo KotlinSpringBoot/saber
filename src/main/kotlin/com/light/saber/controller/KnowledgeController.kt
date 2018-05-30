@@ -1,8 +1,9 @@
 package com.light.saber.controller
 
-import com.light.saber.dao.KnowledgeDao
+import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
 import com.light.saber.service.KnowledgeService
+import com.light.saber.service.TakeKeyWordsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -16,7 +17,7 @@ import java.util.*
 @Controller
 class KnowledgeController {
     @Autowired
-    lateinit var KnowledgeDao: KnowledgeDao
+    lateinit var KnowledgeMapper: KnowledgeMapper
     @Autowired
     lateinit var KnowledgeService: KnowledgeService
 
@@ -56,7 +57,7 @@ class KnowledgeController {
             try {
                 knowledge.gmtCreate = Date()
                 knowledge.gmtModified = Date()
-                KnowledgeDao.save(knowledge)
+                KnowledgeMapper.save(knowledge)
                 return Result(title, "保存成功", true)
             } catch (e: Exception) {
                 return Result(title, "系统出错啦:${e.message}", false)
@@ -66,14 +67,24 @@ class KnowledgeController {
     }
 
     private fun isTitleExist(title: String): Boolean {
-        val know = KnowledgeDao.selectByTitle(title)
+        val know = KnowledgeMapper.selectByTitle(title)
         return !StringUtils.isEmpty(know)
     }
 
     @GetMapping("/knowledge/{id}")
     fun detail(@PathVariable("id") id: Long, model: Model): String {
-        model.addAttribute("Knowledge", KnowledgeDao.getOne(id))
+        model.addAttribute("Knowledge", KnowledgeMapper.getOne(id))
         return "detail"
+    }
+
+    @Autowired lateinit var TakeKeyWordsService: TakeKeyWordsService
+    @GetMapping("/takeKeyWordsService")
+    @ResponseBody
+    fun takeKeyWordsService(): String {
+        Thread {
+            TakeKeyWordsService.take()
+        }.start()
+        return "DONE"
     }
 
 }

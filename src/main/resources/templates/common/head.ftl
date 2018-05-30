@@ -5,10 +5,26 @@
     <!-- 强制让文档与设备的宽度保持1：1 -->
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>
     <link href="/assets/logo.jpg" rel="shortcut icon" type="image/x-icon"/>
     <title>MicroTek</title>
     <link rel="stylesheet" href="/assets/layui/css/layui.css">
+    <style>
+        .layui-body {
+            left: 40px;
+        }
+
+        .layui-layout-admin .layui-footer {
+            left: 0;
+        }
+
+        .layui-card-header {
+            border-bottom: 0;
+        }
+
+        .layui-card {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, .05);
+        }
+    </style>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 </head>
 <body class="layui-layout-body">
@@ -19,10 +35,36 @@
             <a href="/" style="color: #009688;font-size: 1.2em;">微技 GD</a>
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left ">
+        <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="/">GD 技术流</a></li>
             <li class="layui-nav-item"><a href="">服务管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">爬虫任务</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/knowledge/doCrawJianShu" target="_blank">抓取简书</a></dd>
+                    <dd><a href="/knowledge/doCrawSegmentFaultKnowledge" target="_blank">抓取SegmentFault</a></dd>
+                    <dd><a href="/knowledge/doCrawOSChinaKnowledge" target="_blank">抓取OSChina</a></dd>
+                    <dd><a href="/knowledge/doCrawITEyeKnowledge" target="_blank">抓取ITEye</a></dd>
+                    <dd><a href="/knowledge/doCrawImportNewKnowledge" target="_blank">抓取ImportNew</a></dd>
+                    <dd><a href="/knowledge/doCrawCNBlogKnowledge" target="_blank">抓取CNBlog</a></dd>
+                    <dd><a href="/knowledge/doCrawInfoQKnowledge" target="_blank">抓取InfoQ</a></dd>
+                    <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
+                    <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
+                    <dd><a href="">超链接</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item">
+                <a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">列表一</a></dd>
+                    <dd><a href="javascript:;">列表二</a></dd>
+                    <dd><a href="">超链接</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">机器人管理</a></li>
+            <li class="layui-nav-item"><a href="">发布服务</a></li>
+            <li class="layui-nav-item"><a href="">用户管理</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
@@ -32,6 +74,7 @@
                 </dl>
             </li>
         </ul>
+
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">微技</a>
@@ -43,39 +86,4 @@
             <li class="layui-nav-item"><a href="">退了</a></li>
         </ul>
     </div>
-
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">知识库</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/knowledge/doCrawJianShu" target="_blank">抓取简书</a></dd>
-                        <dd><a href="/knowledge/doCrawSegmentFaultKnowledge" target="_blank">抓取SegmentFault</a></dd>
-                        <dd><a href="/knowledge/doCrawOSChinaKnowledge" target="_blank">抓取OSChina</a></dd>
-                        <dd><a href="/knowledge/doCrawITEyeKnowledge" target="_blank">抓取ITEye</a></dd>
-                        <dd><a href="/knowledge/doCrawImportNewKnowledge" target="_blank">抓取ImportNew</a></dd>
-                        <dd><a href="/knowledge/doCrawCNBlogKnowledge" target="_blank">抓取CNBlog</a></dd>
-                        <dd><a href="/knowledge/doCrawInfoQKnowledge" target="_blank">抓取InfoQ</a></dd>
-                        <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
-                        <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">机器人管理</a></li>
-                <li class="layui-nav-item"><a href="">发布服务</a></li>
-            </ul>
-
-        </div>
-    </div>
-
     <div class="layui-body">

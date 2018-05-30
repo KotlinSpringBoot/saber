@@ -1,6 +1,6 @@
 package com.light.saber.service
 
-import com.light.saber.dao.KnowledgeDao
+import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -21,19 +21,22 @@ class KnowledgeServiceImpl : KnowledgeService {
         Knowledge.content = content ?: ""
         Knowledge.gmtCreate = Date()
         Knowledge.gmtModified = Date()
+
+        val keyWords =
+
         try {
-            KnowledgeDao.save(Knowledge)
+            KnowledgeMapper.save(Knowledge)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    @Autowired lateinit var KnowledgeDao: KnowledgeDao
+    @Autowired lateinit var KnowledgeMapper: KnowledgeMapper
     override fun page(title: String?, page: Pageable): Page<Knowledge> {
         if (StringUtils.isEmpty(title)) {
-            return KnowledgeDao.page(page)
+            return KnowledgeMapper.page(page)
         } else {
-            return KnowledgeDao.page(title, page)
+            return KnowledgeMapper.page(title, page)
         }
     }
 }

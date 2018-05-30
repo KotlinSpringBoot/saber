@@ -32,6 +32,7 @@
                                     <a href="/knowledge/${e.id?string("#")}" target="_blank" style="color: #469689">${e.title}</a>
                                 </h3>
                                 <h5 class="layui-timeline-title">
+                                    ${e.keyWords!""}
                                     ${e.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
                                 </h5>
                                 <textarea class="content" id="content-${e.id?string("#")}">
@@ -57,6 +58,9 @@
         border-width: 0px;
         border-style: solid;
         border-radius: 2px;
+    }
+    .layui-layedit-tool {
+        border-bottom-width: 0;
     }
 </style>
 <script src="/assets/layui/layui.all.js"></script>

@@ -62,5 +62,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.alibaba/fastjson
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
 
+    // https://mvnrepository.com/artifact/org.htmlparser/htmlparser
+	compile group: 'org.htmlparser', name: 'htmlparser', version: '2.1'
+	// https://mvnrepository.com/artifact/com.hankcs/hanlp
+	compile group: 'com.hankcs', name: 'hanlp', version: 'portable-1.6.4'
 
 }
