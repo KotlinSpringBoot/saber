@@ -58,6 +58,9 @@
         border-style: solid;
         border-radius: 2px;
     }
+    .layui-layedit-tool {
+        border-bottom-width: 0;
+    }
 </style>
 <script src="/assets/layui/layui.all.js"></script>
 <script>
