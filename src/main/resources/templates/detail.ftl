@@ -9,7 +9,7 @@
                             <i class="layui-icon layui-timeline-axis"></i>
                             <div class="layui-timeline-content layui-text">
                                 <h3 class="layui-timeline-title">
-                                ${Knowledge.title}
+                                    <a href="${Knowledge.url!""}" target="_blank">${Knowledge.title}</a>
                                 </h3>
                                 <h5 class="layui-timeline-title">
                                 ${Knowledge.gmtCreate?string("yyyy-MM-dd HH:mm:ss")}
