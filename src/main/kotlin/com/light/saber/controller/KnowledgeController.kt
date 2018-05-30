@@ -78,7 +78,8 @@ class KnowledgeController {
     }
 
     @Autowired lateinit var TakeKeyWordsService: TakeKeyWordsService
-    @GetMapping("takeKeyWordsService")
+    @GetMapping("/takeKeyWordsService")
+    @ResponseBody
     fun takeKeyWordsService(): String {
         Thread {
             TakeKeyWordsService.take()
