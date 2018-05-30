@@ -2,9 +2,6 @@ package com.light.saber.crawler
 
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.util.StringUtils
-import java.util.*
 
 interface KnowledgeWebCrawler {
     fun pageUrls(page: Int): String

@@ -5,7 +5,6 @@
     <!-- 强制让文档与设备的宽度保持1：1 -->
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>
     <link href="/assets/logo.jpg" rel="shortcut icon" type="image/x-icon"/>
     <title>MicroTek</title>
     <link rel="stylesheet" href="/assets/layui/css/layui.css">
@@ -21,8 +20,9 @@
         .layui-card-header {
             border-bottom: 0;
         }
+
         .layui-card {
-            box-shadow: 0 0 0 0 rgba(0,0,0,.05);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, .05);
         }
     </style>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
@@ -35,7 +35,7 @@
             <a href="/" style="color: #009688;font-size: 1.2em;">微技 GD</a>
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left ">
+        <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="/">GD 技术流</a></li>
             <li class="layui-nav-item"><a href="">服务管理</a></li>
             <li class="layui-nav-item">
