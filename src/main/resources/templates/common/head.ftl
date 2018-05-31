@@ -50,6 +50,7 @@
                     <dd><a href="/knowledge/doCrawInfoQKnowledge" target="_blank">抓取InfoQ</a></dd>
                     <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
                     <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
+                    <dd><a href="/knowledge/KnowledgeCrawlerOfConcurrentProgramming" target="_blank">并发编程网</a></dd>
                     <dd><a href="">超链接</a></dd>
                 </dl>
             </li>

@@ -1,6 +1,6 @@
 package com.light.saber.controller
 
-import com.light.saber.crawler.KnowledgeCrawlerOfSpring4All
+import com.light.saber.crawler.*
 import com.light.saber.service.CrawKnowledgeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,6 +15,10 @@ class KnowledgeCrawController {
 
     @Autowired
     lateinit var KnowledgeCrawlerOfSpring4All: KnowledgeCrawlerOfSpring4All
+
+
+    @Autowired
+    lateinit var KnowledgeCrawlerOfConcurrentProgramming: KnowledgeCrawlerOfConcurrentProgramming
 
 
     @GetMapping("/knowledge/doCrawJianShu")
@@ -95,6 +99,16 @@ class KnowledgeCrawController {
     fun KnowledgeCrawlerOfSpring4All(): String {
         Thread {
             KnowledgeCrawlerOfSpring4All.doCraw()
+        }.start()
+
+        return "DONE"
+    }
+
+
+    @GetMapping("/knowledge/KnowledgeCrawlerOfConcurrentProgramming")
+    fun KnowledgeCrawlerOfConcurrentProgramming(): String {
+        Thread {
+            KnowledgeCrawlerOfConcurrentProgramming.doCraw()
         }.start()
 
         return "DONE"
