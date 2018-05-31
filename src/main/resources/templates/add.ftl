@@ -33,11 +33,9 @@
             </form>
         </div>
 
-
     </div>
 </div>
-
-<script src="/assets/layui/layui.all.js"></script>
+<#include 'common/js.ftl'>
 <script>
     $(function () {
         var layer;

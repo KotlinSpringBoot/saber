@@ -29,7 +29,8 @@
                             <i class="layui-icon layui-timeline-axis"></i>
                             <div class="layui-timeline-content layui-text">
                                 <h3 class="layui-timeline-title">
-                                    <a href="/knowledge/${e.id?string("#")}" target="_blank" style="color: #469689">${e.title}</a>
+                                    <a href="/knowledge/${e.id?string("#")}" target="_blank"
+                                       style="color: #469689">${e.title}</a>
                                 </h3>
                                 <h5 class="layui-timeline-title">
                                     ${e.keyWords!""}
@@ -59,11 +60,12 @@
         border-style: solid;
         border-radius: 2px;
     }
+
     .layui-layedit-tool {
         border-bottom-width: 0;
     }
 </style>
-<script src="/assets/layui/layui.all.js"></script>
+<#include 'common/js.ftl'>
 <script>
     $(function () {
         $('#search-btn').on('click', () => {
@@ -108,6 +110,26 @@
                     console.log(href)
                     location.href = href;
                 }
+            }
+        });
+
+        $(document).on('keydown', function (event) {
+            // 键盘翻页事件
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+
+            if (e && e.keyCode == 37 || e.keyCode == 38) {//左
+                // 上一页
+                $('.layui-laypage-prev')[0].click()
+            }
+
+            if (e && e.keyCode == 39 || e.keyCode == 40) {//右
+                // 下一页
+                $('.layui-laypage-next')[0].click()
+            }
+
+            if (e && e.keyCode == 13) { // enter 键
+                var title = $('#searchText').val()
+                location.href = '/?title=' + title;
             }
         });
     })

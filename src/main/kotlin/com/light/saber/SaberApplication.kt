@@ -9,3 +9,4 @@ open class SaberApplication
 fun main(args: Array<String>) {
     runApplication<SaberApplication>(*args)
 }
+

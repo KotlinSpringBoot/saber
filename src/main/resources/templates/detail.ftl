@@ -37,7 +37,7 @@
         border-bottom-width: 0;
     }
 </style>
-<script src="/assets/layui/layui.all.js"></script>
+<#include 'common/js.ftl'>
 <script>
     $(function () {
         layui.use('layedit', function () {

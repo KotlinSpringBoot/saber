@@ -1,0 +1,30 @@
+.ipad {
+    margin: 50px
+}
+
+.center {
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    z-index: 99999999999999;
+    border: none;
+    outline: none;
+    background-color: #009688;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#back-to-top:hover {
+    background-color: #23262E;
+}
