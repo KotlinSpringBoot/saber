@@ -2,8 +2,9 @@ package com.light.saber.controller
 
 import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
+import com.light.saber.result.Result
 import com.light.saber.service.KnowledgeService
-import com.light.saber.service.TakeKeyWordsService
+import com.light.saber.service.impl.TakeKeyWordsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort

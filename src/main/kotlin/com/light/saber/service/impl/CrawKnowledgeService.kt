@@ -1,4 +1,4 @@
-package com.light.saber.service
+package com.light.saber.service.impl
 
 import com.light.saber.dao.CrawSourceMapper
 import com.light.saber.dao.KnowledgeMapper
@@ -120,8 +120,7 @@ class CrawKnowledgeService {
                     val BlockChain文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val BlockChain文章Document = Jsoup.parse(BlockChain文章HTML)
                     val content = 获取BlockChain文章内容(BlockChain文章Document)
-                    println(title)
-                    println(url)
+
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -150,8 +149,6 @@ class CrawKnowledgeService {
                     val InfoQ文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val InfoQ文章Document = Jsoup.parse(InfoQ文章HTML)
                     val content = 获取InfoQ文章内容(InfoQ文章Document)
-                    println(title)
-                    println(url)
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -183,8 +180,6 @@ class CrawKnowledgeService {
                     val CNBlog文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val CNBlog文章Document = Jsoup.parse(CNBlog文章HTML)
                     val content = 获取CNBlog文章内容(CNBlog文章Document)
-                    println(title)
-                    println(url)
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -217,8 +212,6 @@ class CrawKnowledgeService {
                     val ITEye文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val ITEye文章Document = Jsoup.parse(ITEye文章HTML)
                     val content = 获取ITEye文章内容(ITEye文章Document)
-                    println(title)
-                    println(url)
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -250,8 +243,6 @@ class CrawKnowledgeService {
                     val ImportNew文章Document = Jsoup.parse(ImportNew文章HTML)
                     val title = 获取ImportNew文章标题(ImportNew文章Document)
                     val content = 获取ImportNew文章内容(ImportNew文章Document)
-                    println(title)
-                    println(url)
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -308,8 +299,6 @@ class CrawKnowledgeService {
                     val OSChina文章HTML = CrawlerWebClient.getPageHtmlText(url)
                     val OSChina文章Document = Jsoup.parse(OSChina文章HTML)
                     val content = 获取OSChina文章内容(OSChina文章Document)
-                    println(url)
-//                println(content)
                     doSaveKnowledge(
                             url = url,
                             title = titles[index],
@@ -342,10 +331,6 @@ class CrawKnowledgeService {
                     val SegmentFault文章Document = Jsoup.parse(SegmentFault文章HTML)
                     val title = 获取SegmentFault文章标题(SegmentFault文章Document)
                     val content = 获取SegmentFault文章内容(SegmentFault文章Document)
-                    println(title)
-                    println(url)
-                    println(content)
-
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -386,10 +371,6 @@ class CrawKnowledgeService {
                     val 简书文章Document = Jsoup.parse(简书文章HTML)
                     val title = 获取简书文章标题(简书文章Document)
                     val content = 获取简书文章内容(简书文章Document)
-                    println(title)
-                    println(url)
-                    println(content)
-
                     doSaveKnowledge(
                             url = url,
                             title = title,
@@ -442,6 +423,10 @@ class CrawKnowledgeService {
             val keyWords = TakeKeyWordsService.getKeyWords(html)
             Knowledge.keyWords = keyWords
         }
+
+        println(Knowledge.url)
+        println(Knowledge.title)
+        println(Knowledge.keyWords)
 
         try {
             KnowledgeMapper.save(Knowledge)

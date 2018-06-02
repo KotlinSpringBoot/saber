@@ -52,8 +52,8 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">微图</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/sotu_gank_view">干货福利</a></dd>
-                    <dd><a href="/sotu_favorite_view">精选收藏</a></dd>
+                    <dd><a href="/sotu_gank_view" target="_blank">干货福利</a></dd>
+                    <dd><a href="/sotu_favorite_view" target="_blank">精选收藏</a></dd>
                 </dl>
             </li>
 
@@ -70,7 +70,8 @@
                     <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
                     <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
                     <dd><a href="/knowledge/KnowledgeCrawlerOfConcurrentProgramming" target="_blank">并发编程网</a></dd>
-                    <dd><a href="/doGankImageCrawJob" target="_blank">干货福利</a></dd>
+                    <dd><a href="/crawGankImageService" target="_blank">干货福利</a></dd>
+                    <dd><a href="/crawSinaImageService" target="_blank">新浪图片</a></dd>
                 </dl>
             </li>
 
