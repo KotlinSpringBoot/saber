@@ -70,8 +70,8 @@
                     <dd><a href="/knowledge/doCrawBlockChainKnowledge" target="_blank">BlockChain</a></dd>
                     <dd><a href="/knowledge/KnowledgeCrawlerOfSpring4All" target="_blank">Spring4All</a></dd>
                     <dd><a href="/knowledge/KnowledgeCrawlerOfConcurrentProgramming" target="_blank">并发编程网</a></dd>
-                    <dd></dd>
-                    <dd><a href="/doGankImageCrawJob">干货福利</a></dd>
+                    <dd><a href="/crawGankImageService" target="_blank">干货福利</a></dd>
+                    <dd><a href="/crawSinaImageService" target="_blank">新浪图片</a></dd>
                 </dl>
             </li>
 

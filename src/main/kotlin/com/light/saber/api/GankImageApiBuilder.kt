@@ -1,6 +1,6 @@
 package com.light.saber.api
 
-object GankApiBuilder {
+object GankImageApiBuilder {
     fun build(page: Int): String {
         // 此处 api 中的中文需要转义
         return "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/100/${page}"

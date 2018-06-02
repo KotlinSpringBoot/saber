@@ -1,4 +1,4 @@
-package com.light.saber.service
+package com.light.saber.service.impl
 
 import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.textrank.HtmlUtil

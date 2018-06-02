@@ -1,7 +1,8 @@
-package com.light.saber.service
+package com.light.saber.service.impl
 
 import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
+import com.light.saber.service.KnowledgeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
