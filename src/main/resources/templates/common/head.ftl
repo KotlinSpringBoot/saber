@@ -52,8 +52,8 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">微图</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/sotu_gank_view">干货福利</a></dd>
-                    <dd><a href="/sotu_favorite_view">精选收藏</a></dd>
+                    <dd><a href="/sotu_gank_view" target="_blank">干货福利</a></dd>
+                    <dd><a href="/sotu_favorite_view" target="_blank">精选收藏</a></dd>
                 </dl>
             </li>
 
