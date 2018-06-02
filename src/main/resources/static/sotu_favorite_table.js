@@ -50,9 +50,9 @@ $(function () {
         cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,  //是否显示分页（*）
         paginationLoop: true,
-        paginationHAlign: 'right', //right, left
-        paginationVAlign: 'bottom', //bottom, top, both
-        paginationDetailHAlign: 'left', //right, left
+        paginationHAlign: 'left', //right, left
+        paginationVAlign: 'both', //bottom, top, both
+        paginationDetailHAlign: 'right', //right, left
         paginationPreText: ' 上一页',
         paginationNextText: '下一页',
         search: true,

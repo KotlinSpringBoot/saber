@@ -13,15 +13,15 @@
 #back-to-top {
     display: none;
     position: fixed;
-    bottom: 10px;
+    bottom: 60px;
     right: 20px;
     z-index: 99999999999999;
     border: none;
     outline: none;
-    background-color: #009688;
+    background-color: #009688bf;
     color: white;
     cursor: pointer;
-    padding: 5px;
+    padding: 7px;
     border-radius: 10px;
 }
 

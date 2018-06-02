@@ -52,9 +52,9 @@ $(function () {
         cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,  //是否显示分页（*）
         paginationLoop: true,
-        paginationHAlign: 'right', //right, left
-        paginationVAlign: 'bottom', //bottom, top, both
-        paginationDetailHAlign: 'left', //right, left
+        paginationHAlign: 'left', //right, left
+        paginationVAlign: 'both', //bottom, top, both
+        paginationDetailHAlign: 'right', //right, left
         paginationPreText: ' 上一页',
         paginationNextText: '下一页',
         search: true,
@@ -68,7 +68,7 @@ $(function () {
         sortName: "id",
         pageNumber: 1,     //初始化加载第一页，默认第一页
         pageSize: 10,      //每页的记录行数（*）
-        pageList: [20, 50, 100, 200, 500, 1000], // 可选的每页数据
+        pageList: [10, 25, 50, 100, 200, 500, 1000], // 可选的每页数据
         totalField: 'totalElements', // 所有记录 count
         dataField: 'content', //后端 json 对应的表格List数据的 key
         columns: columns,
