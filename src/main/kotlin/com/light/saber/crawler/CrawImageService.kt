@@ -1,4 +1,4 @@
-package com.light.saber.service
+package com.light.saber.crawler
 
 interface CrawImageService {
     fun doCrawJob()

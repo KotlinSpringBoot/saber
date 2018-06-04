@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service
 @Service
 class KnowledgeCrawlerOfConcurrentProgramming : KnowledgeWebCrawler {
     @Autowired
-    @Qualifier("knowledgeService")
     lateinit var KnowledgeService: KnowledgeService
     @Autowired
     lateinit var CrawlerWebClient: CrawlerWebClient

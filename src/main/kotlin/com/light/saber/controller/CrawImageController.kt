@@ -1,7 +1,7 @@
 package com.light.saber.controller
 
-import com.light.saber.service.impl.CrawGankImageService
-import com.light.saber.service.impl.CrawSinaImageService
+import com.light.saber.crawler.CrawImageServiceGankImpl
+import com.light.saber.crawler.CrawImageServiceSinaImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody
 class CrawImageController {
 
     @Autowired
-    lateinit var crawGankImageService: CrawGankImageService
+    lateinit var crawGankImageService: CrawImageServiceGankImpl
     @Autowired
-    lateinit var crawSinaImageService: CrawSinaImageService
+    lateinit var crawSinaImageService: CrawImageServiceSinaImpl
 
     @RequestMapping(value = ["crawGankImageService"], method = [(RequestMethod.GET)])
     @ResponseBody

@@ -1,7 +1,7 @@
 package com.light.saber.controller
 
 import com.light.saber.crawler.*
-import com.light.saber.service.impl.CrawKnowledgeService
+import com.light.saber.crawler.CrawKnowledgeServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class KnowledgeCrawController {
     @Autowired
-    lateinit var CrawKnowledgeService: CrawKnowledgeService
+    lateinit var CrawKnowledgeService: CrawKnowledgeServiceImpl
 
 
     @Autowired

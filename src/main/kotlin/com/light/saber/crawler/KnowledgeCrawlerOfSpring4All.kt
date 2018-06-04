@@ -16,7 +16,6 @@ import java.net.URL
 @Service
 class KnowledgeCrawlerOfSpring4All : KnowledgeJsonCrawler {
     @Autowired
-    @Qualifier("knowledgeService")
     lateinit var KnowledgeService: KnowledgeService
     @Autowired
     lateinit var CrawlerWebClient: CrawlerWebClient

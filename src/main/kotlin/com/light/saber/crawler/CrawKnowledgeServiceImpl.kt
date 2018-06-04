@@ -1,8 +1,9 @@
-package com.light.saber.service.impl
+package com.light.saber.crawler
 
 import com.light.saber.dao.CrawSourceMapper
 import com.light.saber.dao.KnowledgeMapper
 import com.light.saber.model.Knowledge
+import com.light.saber.service.impl.TakeKeyWordsService
 import com.light.saber.webclient.CrawlerWebClient
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 
 @Service
-class CrawKnowledgeService {
+class CrawKnowledgeServiceImpl : CrawKnowledgeService {
     @Autowired
     lateinit var KnowledgeMapper: KnowledgeMapper
     @Autowired
@@ -408,7 +409,7 @@ class CrawKnowledgeService {
     }
 
     @Autowired lateinit var TakeKeyWordsService: TakeKeyWordsService
-    private fun doSaveKnowledge(url: String, title: String?, content: String?) {
+    override fun doSaveKnowledge(url: String, title: String?, content: String?) {
         if (StringUtils.isEmpty(url) || StringUtils.isEmpty(title) || StringUtils.isEmpty(content)) {
             return
         }
